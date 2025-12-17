@@ -1,0 +1,7 @@
+node_modules
+dist
+logs
+.env
+Dockerfile.dev
+docker-compose.dev.yml
+/src/generated/prisma

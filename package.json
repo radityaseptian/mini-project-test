@@ -1,0 +1,39 @@
+{
+  "name": "mini-project-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec \"ts-node\" src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "init": "prisma generate && prisma db push",
+    "start:docker": "npm run init && npm run build && npm run start",
+    "start:worker": "npm run build && node dist/workers/news.worker.js",
+    "start:worker:dev": "nodemon --exec \"ts-node\" src/workers/news.worker.ts",
+    "start:dev": "npm run init && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.14.0",
+    "@prisma/client": "^6.19.0",
+    "amqplib": "^0.10.9",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1",
+    "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.28.5",
+    "@types/amqplib": "^0.10.8",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.4",
+    "prisma": "^6.19.0",
+    "ts-node": "^10.9.2"
+  }
+}
