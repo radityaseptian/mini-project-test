@@ -60,9 +60,7 @@ services:
   main:
     image: node:20
     working_dir: /app
-    build:
-      context: .
-    command: sh -c "npm install && npm run start:docker"
+    command: sh -c "npm install && npm start"
     restart: always
     depends_on:
       mysql:
@@ -84,8 +82,6 @@ services:
   news-worker:
     image: node:20
     working_dir: /app
-    build:
-      context: .
     restart: always
     depends_on:
       elasticsearch:

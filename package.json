@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "nodemon --exec \"ts-node\" src/index.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "npm run init && npm run build && node dist/index.js",
     "init": "npx prisma generate && npx prisma db push",
-    "start:docker": "npm run init && npm run build && npm run start",
-    "start:worker": "npm run build && node dist/workers/news.worker.js",
-    "start:worker:dev": "nodemon --exec \"ts-node\" src/workers/news.worker.ts",
+    "worker": "npm run build && node dist/workers/news.worker.js",
+    "worker:dev": "nodemon --exec \"ts-node\" src/workers/news.worker.ts",
     "start:dev": "npm run init && npm run dev"
   },
   "keywords": [],
