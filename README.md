@@ -57,6 +57,6 @@ Base URL : `http://localhost:3000`
 
 | Request Query | Type   | Description                                 |
 | :------------ | :----- | :------------------------------------------ |
-| q             | number | _Required_. Query Pencarian Minimal 2 huruf |
-| author        | number | _Optional_. Nama Pembuat Berita             |
+| q             | string | _Required_. Query Pencarian Minimal 2 huruf |
+| author        | string | _Optional_. Nama Pembuat Berita             |
 | source        | string | _Optional_. Sumber Berita                   |
