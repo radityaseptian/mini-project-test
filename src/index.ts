@@ -7,6 +7,7 @@ import { appConfig } from './utils/environment'
 import { newsRouter } from './router'
 import { errorMiddleware } from './middleware/error.middleware'
 import { getRabbitChannel } from './utils/rabbitmq'
+import { generateDummyNewsData } from './utils/inject'
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(errorMiddleware)
 const server = http.createServer(app)
 
 const main = async () => {
+  generateDummyNewsData()
   const ch = await getRabbitChannel()
 
   server.listen(appConfig.port, () => {

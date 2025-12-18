@@ -44,24 +44,17 @@ export class NewsService {
   }
 
   static async searchNews(data: { q?: string; filters?: { source?: string; author?: string } }): Promise<NewsData[]> {
-    const boolQuery: any = { must: [], filter: [] }
+    const boolQuery: any = { filter: [], should: [] }
 
     if (data.q) {
-      boolQuery.must.push({
-        multi_match: {
-          query: data.q,
-          fields: ['title^2', 'content'],
-          // fuzziness: 'and'
-        }
-      })
+      boolQuery.should.push(
+        { match: { title: { query: data.q, boost: 3, fuzziness: 'AUTO' } } },
+        { match: { content: { query: data.q, boost: 1, fuzziness: 'AUTO' } } }
+      )
     }
 
-    if (data.filters?.source) {
-      boolQuery.filter.push({ term: { source: data.filters.source } })
-    }
-    if (data.filters?.author) {
-      boolQuery.filter.push({ term: { author: data.filters.author } })
-    }
+    if (data.filters?.source) boolQuery.filter.push({ term: { source: data.filters.source } })
+    if (data.filters?.author) boolQuery.filter.push({ term: { author: data.filters.author } })
 
     const result = await esClient.search({ index: 'news', size: this.DEFAULT_LIMIT_SEARCH, query: { bool: boolQuery } })
 

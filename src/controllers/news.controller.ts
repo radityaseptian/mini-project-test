@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
 import { NewsService } from '../services/index'
-import { NewsSource } from '../model/news.model'
 import z from 'zod'
 
 export class NewsController {
@@ -10,7 +9,7 @@ export class NewsController {
         title: z.string().min(1),
         content: z.string().min(1),
         author: z.string().min(1),
-        source: z.enum(NewsSource)
+        source: z.string().min(3)
       })
 
       const payload = createNewsSchema.parse(req.body)
@@ -28,7 +27,7 @@ export class NewsController {
       const getNewsPaginationSchema = z.object({
         page: z.coerce.number().min(1).default(1),
         limit: z.coerce.number().min(1).max(50).default(10),
-        source: z.enum(NewsSource).optional()
+        source: z.string().optional()
       })
 
       const payload = getNewsPaginationSchema.parse(req.query)
@@ -44,8 +43,8 @@ export class NewsController {
   static async searchNews(req: Request, res: Response, next: NextFunction) {
     try {
       const schema = z.object({
-        q: z.string().optional(),
-        source: z.enum(NewsSource).optional(),
+        q: z.string().min(2),
+        source: z.string().optional(),
         author: z.string().optional()
       })
 

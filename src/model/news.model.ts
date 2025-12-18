@@ -1,15 +1,9 @@
-export enum NewsSource {
-  Twitter = 'twitter',
-  Facebook = 'facebook',
-  Website = 'website',
-}
-
 export type NewsData = {
   id: number
   title: string
   content: string
   author: string
-  source: NewsSource
+  source: string
   created_at: Date
 }
 
@@ -17,7 +11,7 @@ export type CreateNewsInput = {
   title: string
   content: string
   author: string
-  source: NewsSource
+  source: string
 }
 
 export type RequestPaginationQuery = {
