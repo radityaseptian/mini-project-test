@@ -60,6 +60,7 @@ services:
   main:
     build:
       context: .
+    command: npm run start:docker
     restart: always
     depends_on:
       mysql:
