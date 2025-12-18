@@ -62,7 +62,6 @@ services:
   main:
     build:
       context: .
-      dockerfile: Dockerfile.dev
     restart: always
     depends_on:
       mysql:
@@ -73,7 +72,6 @@ services:
         condition: service_healthy
     env_file:
       - .env
-    command: sh -c "npm run start:dev"
     ports:
       - '${PORT}:${PORT}'
     volumes:
